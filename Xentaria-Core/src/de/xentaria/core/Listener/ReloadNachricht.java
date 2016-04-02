@@ -1,4 +1,4 @@
-package de.xentaria.core.listener;
+package de.xentaria.core.Listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

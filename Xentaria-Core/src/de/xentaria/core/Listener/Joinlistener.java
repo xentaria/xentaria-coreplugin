@@ -1,4 +1,4 @@
-package de.xentaria.core.listener;
+package de.xentaria.core.Listener;
 
 import java.io.IOException;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package de.xentaria.core.befehle;
+package de.xentaria.core.Befehle;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

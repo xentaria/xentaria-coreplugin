@@ -14,15 +14,16 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.xentaria.core.befehle.ChatClear;
-import de.xentaria.core.befehle.GameMode;
-import de.xentaria.core.befehle.HealCommand;
-import de.xentaria.core.befehle.Setspawn;
-import de.xentaria.core.befehle.Spawn;
-import de.xentaria.core.befehle.WetterCommand;
-import de.xentaria.core.listener.HelpCmd;
-import de.xentaria.core.listener.Joinlistener;
-import de.xentaria.core.listener.ReloadNachricht;
+import de.xentaria.core.Befehle.ChatClear;
+import de.xentaria.core.Befehle.GameMode;
+import de.xentaria.core.Befehle.HealCommand;
+import de.xentaria.core.Befehle.Setspawn;
+import de.xentaria.core.Befehle.Spawn;
+import de.xentaria.core.Befehle.SpeedCommand;
+import de.xentaria.core.Befehle.WetterCommand;
+import de.xentaria.core.Listener.HelpCmd;
+import de.xentaria.core.Listener.Joinlistener;
+import de.xentaria.core.Listener.ReloadNachricht;
 
 public class Main extends JavaPlugin{
 
@@ -66,7 +67,7 @@ public class Main extends JavaPlugin{
 		//getCommand("sethome").setExecutor(new SethomeCommand());
 		getCommand("heal").setExecutor(new HealCommand());
 		getCommand("sun").setExecutor(new WetterCommand());
-		getCommand("")
+		getCommand("speed").setExecutor(new SpeedCommand());
 		
 	}
 
