@@ -1,0 +1,29 @@
+name: Xentaria.de
+version: 0.1
+author: stonie1901
+website: http://www.xentaria.de/
+main: de.xentaria.core.Main
+
+commands:
+  cc:
+    description: Loescht den Chat
+  reload:
+    description: Reloaded den Server
+  setspawn:
+    description: Setzt den Spawnpunkt
+  spawn:
+    description: Teleportiert dich zum Spawn
+  heal:
+    description: Gibt dem Spieler volles Leben
+    permission: xentaria.heal
+    usage: /<command> [Spieler]
+  gamemode:
+    description: Setzt deine Gamemode neu
+    permission: xentaria.gamemode
+    usage: /<command> <Gamemode> [Spieler]
+    aliases: [gm]
+  sun:
+    description: Aendert das Wetter
+    permission: xentaria.weather
+    usage: /<command>
+    aliases: [rain,storm]
