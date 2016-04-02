@@ -16,24 +16,28 @@ public class WetterCommand implements CommandExecutor {
 		
 		if (!(p.hasPermission("xentaria.weather"))){
 			p.sendMessage(Main.pre + "Dafür hast du keine Berechtigungen!");
+			return true;
 		} else {
 			if (label.equalsIgnoreCase("sun")) {
 				p.getWorld().setStorm(false);
 				p.getWorld().setThundering(false);
 				p.sendMessage(Main.pre + "Du hast das Wetter auf sonnig gestellt!");
+				return true;
 			} else if (label.equalsIgnoreCase("rain")) {
 				p.getWorld().setStorm(true);
 				p.getWorld().setThundering(false);
 				p.sendMessage(Main.pre + "Du hast das Wetter auf regnerisch geändert!");
+				return true;
 			} else if (label.equalsIgnoreCase("storm")) {
 				p.getWorld().setStorm(true);
 				p.getWorld().setThundering(true);
 				p.sendMessage(Main.pre + "Du hast ein Gewitter ausgelöst!");
+				return true;
 			} else {
 				p.sendMessage(Main.pre + "Falsche Benutzung. Mögliche Befehle: Sun, Rain, Storm.");
+				return true;
 			}
 		}
-		return true;
 	}
 
 }

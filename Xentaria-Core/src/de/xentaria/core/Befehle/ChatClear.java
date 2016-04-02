@@ -43,8 +43,10 @@ public class ChatClear implements CommandExecutor{
 				}
 				andererSpieler.sendMessage(Main.pre + "Dein eigener Chat wurde von §c" + p.getName() + Main.farbe + "gesäubert");
 				p.sendMessage(Main.pre + "Du hast den Chat von §c" + andererSpieler.getName() + Main.farbe + "gesäubert.");
+				return true;
 			} catch (NullPointerException e){
 				p.sendMessage(Main.pre + "Der angegebene Spieler ist offline: §7" + args[0]);
+				return true;
 			}
 		} else {
 			p.sendMessage(Main.pre + "Bitte benutze /cc [Spieler]");

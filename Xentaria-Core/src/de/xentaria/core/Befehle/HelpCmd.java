@@ -1,4 +1,4 @@
-package de.xentaria.core.Listener;
+package de.xentaria.core.Befehle;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
