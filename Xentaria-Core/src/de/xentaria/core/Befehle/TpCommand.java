@@ -1,6 +1,7 @@
 package de.xentaria.core.Befehle;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,9 +11,10 @@ import de.xentaria.core.Main;
 
 public class TpCommand implements CommandExecutor {
 
-	String x;
-	String y;
-	String z;
+	double x;
+	double y;
+	double z;
+	String world;
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		
@@ -31,11 +33,15 @@ public class TpCommand implements CommandExecutor {
 			double x = spieler.getLocation().getX();
 			double y = spieler.getLocation().getY();
 			double z = spieler.getLocation().getZ();
+			String world = spieler.getLocation().getWorld().getName();
 			double yaw = spieler.getLocation().getYaw();
 			
-			p.
+			Location tp = new Location(world, x, y, z, yaw);
 			
-			}
+			p.teleport(tp);
+			
+			
+			
 		}
 		
 		
