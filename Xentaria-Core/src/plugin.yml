@@ -3,23 +3,19 @@ version: 0.1
 author: stonie1901
 website: http://www.xentaria.de/
 main: de.xentaria.core.Main
+depend: [Vault]
 
 commands:
   cc:
     description: Loescht den Chat
   reload:
     description: Reloaded den Server
-  setspawn:
-    description: Setzt den Spawnpunkt
-  spawn:
-    description: Teleportiert dich zum Spawn
   heal:
     description: Gibt dem Spieler volles Leben
     permission: xentaria.heal
     usage: /<command> [Spieler]
   gamemode:
     description: Setzt deine Gamemode neu
-    permission: xentaria.gamemode
     usage: /<command> <Gamemode> [Spieler]
     aliases: [gm]
   sun:
@@ -27,3 +23,14 @@ commands:
     permission: xentaria.weather
     usage: /<command>
     aliases: [rain,storm]
+  speed:
+    description: Setzt deine Geschwindigkeit
+    permission: xentaria.speed
+    usage: /<command> [1-10]
+  fly:
+    description: aedert deinen Flugmodus
+    usage: /<command> [1-10]
+  teleport:
+    description: Teleportiert dich zu einem Spieler
+    usage: /<command> [Spieler1] [Spieler2]
+    aliases: [tp]

@@ -3,10 +3,15 @@ package de.xentaria.core.Befehle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import net.milkbowl.vault.*;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.permissions.Permission;
+
+import de.xentaria.core.Main;
 
 public class HelpCmd implements Listener {
 
+	
 	@EventHandler
 	public void on(PlayerCommandPreprocessEvent e) {
 		Player p = e.getPlayer();
@@ -20,5 +25,7 @@ public class HelpCmd implements Listener {
 			p.sendMessage("§7/msg §8> §9Schreibe eine Private Nachricht");
 			p.sendMessage("§6----------<>----------");
 		}
+		
+		if (permission.))
 	}
 }

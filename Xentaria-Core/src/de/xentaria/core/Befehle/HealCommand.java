@@ -21,11 +21,13 @@ public class HealCommand implements CommandExecutor {
 			} else {
 				if (args.length == 0) {
 					p.setHealth(20.0);
+					p.setFoodLevel(20);
 					p.sendMessage(Main.pre + "Du hast dich geheilt.");
 					return true;
 				} else if (args.length == 1 || p.hasPermission("xentaria.heal.others")) {
 					Player spieler = Bukkit.getPlayer(args[0]);
 					spieler.setHealth(20.0);
+					spieler.setFoodLevel(20);
 					spieler.sendMessage(Main.pre + "Du wurdest geheilt!");
 					p.sendMessage(Main.pre + "Du hast " + spieler.getName() + " geheilt!");
 					return true;

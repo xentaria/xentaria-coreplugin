@@ -5,12 +5,27 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.PluginManager;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+
 import de.xentaria.core.Main;
+import de.xentaria.core.Listener.GamemodeEvent;
 
-public class GameMode implements CommandExecutor {
-
-		
+public class GameMode implements Listener,CommandExecutor {
+			
+	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		
@@ -24,7 +39,41 @@ public class GameMode implements CommandExecutor {
 				return true; 
 			} else {
 				if (args.length == 0) {
-					p.sendMessage(Main.pre + "Zu wenig Argumente!");
+					Inventory inv = Bukkit.createInventory(null, 27, ChatColor.AQUA + "Gamemodeauswahl");
+					
+					ItemStack survival = new ItemStack(Material.GRASS);
+					ItemMeta survivalMeta = survival.getItemMeta();
+					ItemStack creative = new ItemStack(Material.DIAMOND);
+					ItemMeta creativeMeta = creative.getItemMeta();
+					ItemStack adventure = new ItemStack(Material.IRON_SWORD);
+					ItemMeta adventureMeta = adventure.getItemMeta();
+					ItemStack spectator = new ItemStack(Material.GLASS_BOTTLE);
+					ItemMeta spectatorMeta = spectator.getItemMeta();
+					
+					survivalMeta.setDisplayName(ChatColor.AQUA + "Survivalmode");
+					survival.setItemMeta(survivalMeta);
+					
+					creativeMeta.setDisplayName(ChatColor.AQUA + "Kreativmode");
+					creative.setItemMeta(creativeMeta);
+					
+					adventureMeta.setDisplayName(ChatColor.AQUA + "Adventuremode");
+					adventure.setItemMeta(adventureMeta);
+					
+					spectatorMeta.setDisplayName(ChatColor.AQUA + "Spectatormode");
+					spectator.setItemMeta(spectatorMeta);
+					
+					// 012345678
+					//
+					inv.setItem(10, survival);
+					inv.setItem(12, creative);
+					inv.setItem(14, adventure);
+					inv.setItem(16, spectator);
+					
+					p.openInventory(inv);
+					
+					//PluginManager pm = Bukkit.getPluginManager();
+					//pm.registerEvents(new GamemodeEvent(), (Plugin) this);
+
 					return true;
 				} else if (args.length == 1) {
 					 if (args[0].equalsIgnoreCase("1") || args[0].contains("crea") || args[0].contains("krea") || args[0].equalsIgnoreCase("c")){
@@ -75,9 +124,33 @@ public class GameMode implements CommandExecutor {
 			
 		}
 		
-
+		
 		
 		return true;
 	}
-
+	
+	
+	@EventHandler
+    public void onPlayerInventoryClick(InventoryClickEvent event){
+        if (event.getInventory() == null) return;
+        if (event.getInventory().getTitle().equalsIgnoreCase( ChatColor.AQUA + "Gamemodeauswahl")){
+            ItemStack itemStack = event.getCurrentItem();
+            if (itemStack.getItemMeta().getDisplayName() != null){
+                if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Kreativmode")){
+                    event.getWhoClicked().setGameMode(org.bukkit.GameMode.CREATIVE);
+                    event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                } else if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Survivalmode")){
+                    event.getWhoClicked().setGameMode(org.bukkit.GameMode.SURVIVAL);
+                    event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                } else if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Adventuremode")){
+                	event.getWhoClicked().setGameMode(org.bukkit.GameMode.ADVENTURE);
+                	event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                } else if(itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Spectatormode")){
+                	event.getWhoClicked().setGameMode(org.bukkit.GameMode.SPECTATOR);
+                	event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                }
+            }
+        }
+	}
+	
 }
