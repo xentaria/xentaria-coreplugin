@@ -15,6 +15,10 @@ public class TpCommand implements CommandExecutor {
 	double y;
 	double z;
 	String world;
+	float pitch;
+	float yaw;
+	
+	
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		
@@ -34,9 +38,10 @@ public class TpCommand implements CommandExecutor {
 			double y = spieler.getLocation().getY();
 			double z = spieler.getLocation().getZ();
 			String world = spieler.getLocation().getWorld().getName();
-			double yaw = spieler.getLocation().getYaw();
+			float yaw = spieler.getLocation().getYaw();
+			float pitch = spieler.getLocation().getPitch();
 			
-			Location tp = new Location(world, x, y, z, yaw);
+			Location tp = new Location(world, x, y, z, yaw, pitch);
 			
 			p.teleport(tp);
 			

@@ -1,30 +1,18 @@
 package de.xentaria.core;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.defaults.TeleportCommand;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.xentaria.core.Befehle.ChatClear;
-import de.xentaria.core.Befehle.DelwarpCommand;
 import de.xentaria.core.Befehle.GameMode;
 import de.xentaria.core.Befehle.HealCommand;
 import de.xentaria.core.Befehle.HelpCmd;
-import de.xentaria.core.Befehle.Setspawn;
-import de.xentaria.core.Befehle.SetwarpCommand;
-import de.xentaria.core.Befehle.WarpCommand;
-import de.xentaria.core.Befehle.Spawn;
 import de.xentaria.core.Befehle.SpeedCommand;
 import de.xentaria.core.Befehle.TpCommand;
 import de.xentaria.core.Befehle.WetterCommand;
@@ -32,8 +20,6 @@ import de.xentaria.core.Listener.GamemodeEvent;
 import de.xentaria.core.Listener.Joinlistener;
 import de.xentaria.core.Listener.ReloadNachricht;
 import de.xentaria.core.Manager.Warpmanager;
-import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 public class Main extends JavaPlugin{
