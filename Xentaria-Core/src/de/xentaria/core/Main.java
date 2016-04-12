@@ -10,6 +10,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.xentaria.core.Befehle.ChatClear;
+import de.xentaria.core.Befehle.FlyCommand;
 import de.xentaria.core.Befehle.GameMode;
 import de.xentaria.core.Befehle.HealCommand;
 import de.xentaria.core.Befehle.HelpCmd;
@@ -18,6 +19,8 @@ import de.xentaria.core.Befehle.TpCommand;
 import de.xentaria.core.Befehle.WetterCommand;
 import de.xentaria.core.Listener.GamemodeEvent;
 import de.xentaria.core.Listener.Joinlistener;
+import de.xentaria.core.Listener.PlugListener;
+import de.xentaria.core.Listener.PluginListener;
 import de.xentaria.core.Listener.ReloadNachricht;
 import de.xentaria.core.Manager.Warpmanager;
 import net.milkbowl.vault.permission.Permission;
@@ -29,7 +32,9 @@ public class Main extends JavaPlugin{
 	public static String noperm = pre + "§bDafür hast du keine Berechtigungen!";
 	public static String noplayer = "Du bist eine Konsole. Die darf das nicht :/";
 	public static Permission permission = null;
-    
+		
+		
+	
     private boolean vault;
 
 	
@@ -68,10 +73,12 @@ public class Main extends JavaPlugin{
 	    
 		
 		PluginManager pm = Bukkit.getPluginManager();
+		//pm.registerEvents(new PluginListener(), this);
 		pm.registerEvents(new ReloadNachricht(), this);
 		pm.registerEvents(new HelpCmd(), this);
 		pm.registerEvents(new Joinlistener(), this);
 		pm.registerEvents(new GamemodeEvent(), this);
+		pm.registerEvents(new PlugListener(), this);
 		
 		getCommand("cc").setExecutor(new ChatClear());
 		//getCommand("setspawn").setExecutor(new Setspawn());

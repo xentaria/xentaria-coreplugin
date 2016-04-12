@@ -32,25 +32,25 @@ public class TpCommand implements CommandExecutor {
 		if(!p.hasPermission("xentaria.tp")){
 			p.sendMessage(Main.noperm);
 			return true;
-		} else if(args.length == 0){
-			Player spieler = Bukkit.getPlayer(args[0]);
-			double x = spieler.getLocation().getX();
-			double y = spieler.getLocation().getY();
-			double z = spieler.getLocation().getZ();
-			String world = spieler.getLocation().getWorld().getName();
-			float yaw = spieler.getLocation().getYaw();
-			float pitch = spieler.getLocation().getPitch();
-			
-			Location tp = new Location(world, x, y, z, yaw, pitch);
-			
-			p.teleport(tp);
-			
-			
-			
+		} else if(args.length == 1){
+			Player ziel = (Player)Bukkit.getPlayer(args[0]);
+			p.teleport(ziel);
+			Player target = (Player) Bukkit.getPlayer(args[0]);
+			target.sendMessage(Main.pre + p.getName() + " hat sich zu dir teleportiert.");
+			p.sendMessage(Main.pre + "Du hast dich zu " + target.getName() + " teleportiert.");
+			return true;
+		} else if (args.length == 2){
+			Player ziel = (Player) Bukkit.getPlayer(args[0]);
+			Player tp = (Player) Bukkit.getPlayer(args[1]);
+			ziel.teleport(tp);
+;			Player target = (Player) Bukkit.getPlayer(args[0]);
+			target.sendMessage(Main.pre + "Du wurdest zu " + p.getName() + " teleportiert.");
+			p.sendMessage(Main.pre + target.getName() + " wurde zu dir teleportiert.");
+			return true;
+		} else {
+			p.sendMessage(Main.pre + "Falsche Argumente! /tp [spieler1] [spieler2]");
+			return true;
 		}
-		
-		
-		return true;
 	}
 
 }
