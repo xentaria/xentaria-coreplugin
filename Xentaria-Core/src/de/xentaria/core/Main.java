@@ -79,6 +79,7 @@ public class Main extends JavaPlugin{
 		pm.registerEvents(new Joinlistener(), this);
 		pm.registerEvents(new GamemodeEvent(), this);
 		pm.registerEvents(new PlugListener(), this);
+		testvon seb
 		
 		test2
 		
