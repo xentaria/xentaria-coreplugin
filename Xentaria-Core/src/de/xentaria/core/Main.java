@@ -80,6 +80,8 @@ public class Main extends JavaPlugin{
 		pm.registerEvents(new GamemodeEvent(), this);
 		pm.registerEvents(new PlugListener(), this);
 		
+		test2
+		
 		getCommand("cc").setExecutor(new ChatClear());
 		//getCommand("setspawn").setExecutor(new Setspawn());
 		//getCommand("spawn").setExecutor(new Spawn());
