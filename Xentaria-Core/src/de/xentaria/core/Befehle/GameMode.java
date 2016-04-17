@@ -122,25 +122,30 @@ public class GameMode implements Listener,CommandExecutor {
 		return true;
 	}
 	
+	public GameMode(Main plugin){
+		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	} 
 	
 	@EventHandler
-    public void onPlayerInventoryClick(InventoryClickEvent event){
-        if (event.getInventory() == null) return;
-        if (event.getInventory().getTitle().equalsIgnoreCase( ChatColor.AQUA + "Gamemodeauswahl")){
-            ItemStack itemStack = event.getCurrentItem();
+    public void onPlayerInventoryClick(InventoryClickEvent e){
+		
+		Player p = (Player) e.getWhoClicked();
+        if (e.getInventory() == null) return;
+        if (e.getInventory().getTitle().equalsIgnoreCase( ChatColor.AQUA + "Gamemodeauswahl")){
+            ItemStack itemStack = e.getCurrentItem();
             if (itemStack.getItemMeta().getDisplayName() != null){
                 if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Kreativmode")){
-                    event.getWhoClicked().setGameMode(org.bukkit.GameMode.CREATIVE);
-                    event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                    e.getWhoClicked().setGameMode(org.bukkit.GameMode.CREATIVE);
+                    e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
                 } else if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Survivalmode")){
-                    event.getWhoClicked().setGameMode(org.bukkit.GameMode.SURVIVAL);
-                    event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                    e.getWhoClicked().setGameMode(org.bukkit.GameMode.SURVIVAL);
+                    e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
                 } else if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Adventuremode")){
-                	event.getWhoClicked().setGameMode(org.bukkit.GameMode.ADVENTURE);
-                	event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                	e.getWhoClicked().setGameMode(org.bukkit.GameMode.ADVENTURE);
+                	e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
                 } else if(itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Spectatormode")){
-                	event.getWhoClicked().setGameMode(org.bukkit.GameMode.SPECTATOR);
-                	event.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+                	e.getWhoClicked().setGameMode(org.bukkit.GameMode.SPECTATOR);
+                	e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
                 }
             }
         }

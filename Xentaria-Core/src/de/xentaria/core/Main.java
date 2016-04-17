@@ -33,6 +33,7 @@ public class Main extends JavaPlugin{
 	public static String noplayer = "Du bist eine Konsole. Die darf das nicht :/";
 	public static Permission permission = null;
 		
+	public Main plugin;
 		
 	
     private boolean vault;
@@ -66,12 +67,15 @@ public class Main extends JavaPlugin{
 			Bukkit.getPluginManager().disablePlugin(this);
 		}
 		
-		
+		registerCommands();
+		registerEvents();
 		
 		this.vault = (Bukkit.getPluginManager().getPlugin("Vault") != null);
-		System.out.println("[Xentaria.de] Das Plugin wurde aktiviert");
-	    
-		
+		System.out.println("[Xentaria.de] Das Plugin wurde aktiviert");		
+	}
+
+	
+	 public void registerEvents() {
 		PluginManager pm = Bukkit.getPluginManager();
 		//pm.registerEvents(new PluginListener(), this);
 		pm.registerEvents(new ReloadNachricht(), this);
@@ -79,14 +83,14 @@ public class Main extends JavaPlugin{
 		pm.registerEvents(new Joinlistener(), this);
 		pm.registerEvents(new GamemodeEvent(), this);
 		pm.registerEvents(new PlugListener(), this);
-		
-		
-		test2
-		
+	}
+
+
+	public void registerCommands() {
 		getCommand("cc").setExecutor(new ChatClear());
 		//getCommand("setspawn").setExecutor(new Setspawn());
 		//getCommand("spawn").setExecutor(new Spawn());
-		getCommand("gamemode").setExecutor(new GameMode());
+		getCommand("gamemode").setExecutor(new GameMode(plugin));
 		//getCommand("home").setExecutor(new HomeCommand());
 		//getCommand("sethome").setExecutor(new SethomeCommand());
 		getCommand("heal").setExecutor(new HealCommand());
@@ -97,11 +101,10 @@ public class Main extends JavaPlugin{
 		//getCommand("warp").setExecutor(new WarpCommand());
 		//getCommand("setwarp").setExecutor(new SetwarpCommand());
 		//getCommand("delwarp").setExecutor(new DelwarpCommand());
-		
 	}
 
-	
-	 public static File getPlayerFile(UUID arg0) {
+
+	public static File getPlayerFile(UUID arg0) {
 	      File file = new File("plugins/Xentaria/Spieler", arg0.toString() + ".yml");
 	      return file;
 	   }
