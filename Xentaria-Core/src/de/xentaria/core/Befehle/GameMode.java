@@ -7,7 +7,9 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -54,20 +56,13 @@ public class GameMode implements Listener,CommandExecutor {
 					
 					spectatorMeta.setDisplayName(ChatColor.AQUA + "Spectatormode");
 					spectator.setItemMeta(spectatorMeta);
-					
-					// 012345678
-					//
 					inv.setItem(10, survival);
 					inv.setItem(12, creative);
 					inv.setItem(14, adventure);
 					inv.setItem(16, spectator);
 					
 					p.openInventory(inv);
-					
-					//PluginManager pm = Bukkit.getPluginManager();
-					//pm.registerEvents(new GamemodeEvent(), (Plugin) this);
 
-					return true;
 				} else if (args.length == 1) {
 					 if (args[0].equalsIgnoreCase("1") || args[0].contains("crea") || args[0].contains("krea") || args[0].equalsIgnoreCase("c")){
 						 p.setGameMode(org.bukkit.GameMode.CREATIVE);
@@ -122,33 +117,40 @@ public class GameMode implements Listener,CommandExecutor {
 		return true;
 	}
 	
-	public GameMode(Main plugin){
-		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-	} 
-	
-	@EventHandler
-    public void onPlayerInventoryClick(InventoryClickEvent e){
-		
+	public void onInventoryClick(InventoryClickEvent e) {
+		if(ChatColor.stripColor(e.getInventory().getName()).equalsIgnoreCase("Gamemodeauswahl")){
+			return;
+		}
 		Player p = (Player) e.getWhoClicked();
-        if (e.getInventory() == null) return;
-        if (e.getInventory().getTitle().equalsIgnoreCase( ChatColor.AQUA + "Gamemodeauswahl")){
-            ItemStack itemStack = e.getCurrentItem();
-            if (itemStack.getItemMeta().getDisplayName() != null){
-                if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Kreativmode")){
-                    e.getWhoClicked().setGameMode(org.bukkit.GameMode.CREATIVE);
-                    e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
-                } else if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Survivalmode")){
-                    e.getWhoClicked().setGameMode(org.bukkit.GameMode.SURVIVAL);
-                    e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
-                } else if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Adventuremode")){
-                	e.getWhoClicked().setGameMode(org.bukkit.GameMode.ADVENTURE);
-                	e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
-                } else if(itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "Spectatormode")){
-                	e.getWhoClicked().setGameMode(org.bukkit.GameMode.SPECTATOR);
-                	e.getWhoClicked().sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
-                }
-            }
-        }
+		e.setCancelled(true);
+		
+		if(e.getCurrentItem()==null
+				||e.getCurrentItem().getType()==Material.AIR
+				||!e.getCurrentItem().hasItemMeta()){
+			p.closeInventory();
+			return;
+		}
+		
+		switch(e.getCurrentItem().getType()) {
+		case GRASS:
+			 p.setGameMode(org.bukkit.GameMode.SURVIVAL);
+			 p.sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+			 return;
+		case DIAMOND:
+			 p.setGameMode(org.bukkit.GameMode.CREATIVE);
+			 p.sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+			 return;
+		case IRON_SWORD:
+			p.setGameMode(org.bukkit.GameMode.ADVENTURE);
+			p.sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+			return;
+		case GLASS_BOTTLE:
+			p.setGameMode(org.bukkit.GameMode.SPECTATOR);
+			p.sendMessage(Main.pre + "Dein Gamemode wurde geändert!");
+			return;
+		default:
+			p.closeInventory();
+			return;
+		}
 	}
-	
 }

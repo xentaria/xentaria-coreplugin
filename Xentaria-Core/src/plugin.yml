@@ -14,10 +14,6 @@ commands:
     description: Gibt dem Spieler volles Leben
     permission: xentaria.heal
     usage: /<command> [Spieler]
-  gamemode:
-    description: Setzt deine Gamemode neu
-    usage: /<command> <Gamemode> [Spieler]
-    aliases: [gm]
   sun:
     description: Aendert das Wetter
     permission: xentaria.weather
@@ -30,6 +26,12 @@ commands:
   fly:
     description: aedert deinen Flugmodus
     usage: /<command> [1-10]
+  farmen:
+    description: Teleportiert dich zur Farmwelt
+    usage: /<command>
+  ip:
+    description: IP-Befehl
+    usage: /<command>
   teleport:
     description: Teleportiert dich zu einem Spieler
     usage: /<command> [Spieler1] [Spieler2]
